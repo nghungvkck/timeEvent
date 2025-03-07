@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đếm Ngược Sự Kiện</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #222;
+            color: white;
+            margin: 50px;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+        }
+        .countdown {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Đếm Ngược Sự Kiện ⏳</h1>
+    <label for="eventDate">Chọn ngày sự kiện:</label>
+    <input type="datetime-local" id="eventDate">
+    <button onclick="startCountdown()">Bắt đầu</button>
+
+    <div class="countdown" id="countdown"></div>
+
+    <script>
+        let countdownInterval;
+
+        function startCountdown() {
+            if (countdownInterval) clearInterval(countdownInterval);
+
+            let eventDate = new Date(document.getElementById("eventDate").value);
+            if (isNaN(eventDate)) {
+                alert("Vui lòng chọn ngày hợp lệ!");
+                return;
+            }
+
+            countdownInterval = setInterval(() => {
+                let now = new Date();
+                let timeLeft = eventDate - now;
+
+                if (timeLeft <= 0) {
+                    document.getElementById("countdown").innerHTML = "Sự kiện đã diễn ra!";
+                    clearInterval(countdownInterval);
+                    return;
+                }
+
+                let days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                let hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                document.getElementById("countdown").innerHTML =
+                    `${days} ngày ${hours} giờ ${minutes} phút ${seconds} giây`;
+            }, 1000);
+        }
+    </script>
+
+</body>
+</html>

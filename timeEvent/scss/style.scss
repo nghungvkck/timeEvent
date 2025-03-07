@@ -1,0 +1,26 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    background: black
+}
+
+.time{
+    text-align: center;
+    &__title{
+        color: white;
+        font-size: 50px;
+        font-weight: 900;
+        padding: 30px;
+    }
+
+    &__output{
+        &--event{
+            margin-top: 30px;
+            color: white;
+        }
+    }
+
+}
+
